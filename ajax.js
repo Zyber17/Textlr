@@ -17,7 +17,7 @@ $(document).ready(function() {
 		    event.preventDefault();
 		    
 			var text = $('#text').val();
-			$.post('http://localhost:8888/textlr/stuff.php', {
+			$.post('stuff.php', {
 				text:text,
 				ajax:true
 			},
