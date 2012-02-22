@@ -1,9 +1,9 @@
 Textlr is a project by Zackary Corbett
-It is a simple text uploading database, it uses mrkdown, and has a semi-live preview.
+It is a simple text uploading database, it uses markdown, and has a semi-live preview.
 It is my first attempt to use classes
 
 Additionally, there's no install function, but it's pretty simple.
-Just go to phpmyadmin, make a new database, make a tabe in it called "uploads" (no quotes), and enter 3 feilds: id (int, primary, auto_inctoment), test (long text), and short_url (varchar(5)).
+Just go to phpmyadmin, make a new database, make a table in it called "uploads" (no quotes), and enter 3 feilds: id (int, primary, auto_incriment), text (long text), and short_url (varchar(5)).
 Then just go to stuff.php and inter your DB credentials.  (Sorry, for now you'll have to do it all manually in all 3 spots, MAMP is freaking out so I can't add a DB array to save everyone the trouble and time of switching everything).
 
 That's it. I might add and an install someday. Enjoy.

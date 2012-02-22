@@ -13,11 +13,11 @@
 			<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 				<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 					<meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no; maximum-scale=1.0;" />
-					<title>Textlr</title>
+					<title>Textlr'.($answer['title'] ? ': '.$answer['title'] : '').'</title>
 					<style>
 					body {
 						width: 550px;
-						background: #ffffff;
+						background: #f5f5f5;
 						font-family:Helvetica Neue,Helvetica,Arial,Verdana,sans-serif;
 						color: #111;
 						font-size: 16px;
@@ -32,16 +32,23 @@
 						left: 50%;
 						margin-left: -275px;
 					}
+						.title {
+							font-size: 42px;
+							margin-bottom: 20px;
+						}
 					</style>
 				</head>
 				<body>
 					<div id="wrapper">
 					<article>';
+			if ($answer['title']) {
+				$title = '<h1 class="title">'.$answer['title'].'</h1>';
+			}
 			$html2 = '</article>
 					</div>
 				</body>
 			</html>';
-			echo $html1.$answer['text'].$html2;
+			echo $html1.($answer['title'] ? $title : '').$answer['text'].$html2;
 		}
 		public function up($text) {
 			if($text != null && strlen($text) > 2) {
@@ -49,16 +56,19 @@
 			$db = mysql_select_db('textlr', $con) or die(mysql_error());
 			include_once "markdown.php";
 			
+			preg_match('/(?<!.)(^(# ?(.+?) ?#?)$)/sm', $text, $title); # Is there a Markdown H1 on the very first line? If so, let's snatch it up.
+			$text = preg_replace('/(?<!.)(^(# ?(.+?) ?#?)$)/sm', '', $text); # There's no use repeating the H1 twice, so let's just take it out of the text.
+			
 			$text = htmlspecialchars($text, ENT_QUOTES);
 			$text =  Markdown($text);
 			
 			$ran = Textlr::random();
 			
-			$query = "INSERT INTO `uploads` (`id`, `text`, `short_url`) VALUES (NULL,'$text', '$ran');";
+			$query = "INSERT INTO `uploads` (`id`, `text`, `short_url`, `title`) VALUES (NULL,'$text', '$ran', '$title[3]');";
 			mysql_query($query);
 			
 			if($_POST['ajax']){
-				echo $ran;
+				echo($ran);
 			}else{
 				header('Location: '.$ran);
 			}
@@ -96,6 +106,7 @@
 					<title>Textlr</title>
 					<link rel="stylesheet" type="text/css" href="index.css" />
 					<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+					<script src="textinputs.js" type="text/javascript"></script>
 					<script src="ajax.js" type="text/javascript"></script>
 					<script src="showdown.js" type="text/javascript"></script>
 					
@@ -107,7 +118,7 @@
 								<h1>Textlr</h1><h2>— All your text are belong to us</h2>
 							</header>
 							<form method="post" id="form" action="stuff.php">
-								<textarea id="text" name="text" placeholder="Ready to start writing? Just select here!"></textarea>
+								<textarea id="text" name="text" placeholder="Ready to start writing? Just select here! Need help? Type: !help."></textarea>
 								<input type="submit" id="submit" name="submit" value="Upload" />
 							</form>
 						</div>
