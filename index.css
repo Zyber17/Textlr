@@ -35,7 +35,7 @@ a{ color: #a90202; }
 		-webkit-appearance: none;
 		font-family: "Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
 	}
-		
+
 	#typist input {
 		padding: 0;
 		margin: 11px 0;
@@ -73,6 +73,9 @@ a{ color: #a90202; }
 			font-size: 16px;
 			
 		}
+			footer h3:first-of-type {
+				float: left;
+			}
 			footer h3:last-of-type {
 				float: right;
 			}
@@ -120,15 +123,18 @@ a{ color: #a90202; }
 	display: block;
 	font-size: 30px;
 }
-.popover button.okay {
+button.okay {
 	font-family: "Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
 	font-weight: bold;
 	position: relative;
 	-webkit-appearance: none;
 	border-radius: 10px;
+	text-align: center;
+	display: block;
+	font-size: 30px;
 	border: none;
 	padding: 10px 20px;
-	width: 140px;
+	min-width: 140px;
 	left: 50%;
 	margin-left: -70px;
 	color: #fff;
@@ -139,10 +145,16 @@ a{ color: #a90202; }
 	-o-transition: all .2s ease;
 	transition: all .2s ease;
 }
-	.popover button.okay:hover {
+	.preview+button.okay {
+		font-size: 20px;
+		margin-left: -120px;
+		margin-bottom: 15px;
+		width: 240px;
+	}
+	button.okay:hover {
 		background-color: #a90202;
 	}
-	.popover button.okay:active {
+	button.okay:active {
 		opacity: 0.8;
 	}
 #url {
@@ -164,6 +176,12 @@ a{ color: #a90202; }
 		display: block;
 		color: #fff;
 		font-size: 20px;
+	}
+	#url a:first-of-type {
+		float: left;
+	}
+	#url a:last-of-type {
+		float: right;
 	}
 .fade {
 	opacity: 0.6;
