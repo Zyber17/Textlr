@@ -4,7 +4,7 @@ body {
 	color: #111;
 	font-size: 16px;
 	text-align: left;
-	line-height: 1.5;
+	line-height: 1.7;
 }
 a{ color: #a90202; }
 #wrapper {
@@ -19,6 +19,11 @@ a{ color: #a90202; }
 		font-size: 42px;
 		margin-bottom: 20px;
 	}
+blockquote {
+	border-left: 7px solid #dfdfdf;
+	margin-left: 0;
+	padding-left: 15px;
+}
 @media only screen and (device-width: 1024px) and (device-height: 768px), only screen and (device-width: 320px) and (device-height: 480px){
 	body {
 		font-size: 18px;
@@ -27,5 +32,8 @@ a{ color: #a90202; }
 @media only screen and (device-width: 320px) and (device-height: 480px){
 	#wrapper {
 		padding-top: 0;
+	}
+	body{
+		line-height:1.6;
 	}
 }
