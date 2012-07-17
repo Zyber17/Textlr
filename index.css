@@ -20,6 +20,10 @@ a{ color: #a90202; }
 #typist h1, h2 {
 	display: inline-block;
 }
+	#typist h2:before {
+		content: "—";
+		margin-right: 8px;
+	}
 	#typist textarea {
 		width: 100%;
 		max-width: 100%;
@@ -56,30 +60,59 @@ a{ color: #a90202; }
 		font-weight: bold;
 		color: #FFF;
 	}
+
+footer {
+	height: 13px;
+	display: block;
+	position: absolute;
+	bottom: 16px;
+	font-size: 13px;
+	right: 0;
+	line-height: 1;
+}
+	footer ul {
+		height: 16px;
+		list-style: none;
+	}
+		footer ul li {
+			float: left;
+			margin-right: 4px;
+			padding-right: 4px;
+			border-right: 1px #aaa solid;
+		}
+			footer ul li:last-of-type {
+				margin-right: 4px;
+				padding-right: 0;
+				border-right: none
+			}
+			footer ul li a:link, footer ul li a:visited {
+				color: #777;
+				text-decoration: none;
+			}
 	
 	.title {
 		font-size: 42px;
 		margin-bottom: 20px;
 	}
 	
-	footer {
+	.textinfo {
 		border-top: 1px solid #ccc;
 		clear: both;
 	}
-		footer h3 {
+		.textinfo h3 {
 			display: inline-block;
 			color: #ccc;
 			font-weight: 500;
 			font-size: 16px;
 			
 		}
-			footer h3:first-of-type {
+			.textinfo h3:first-of-type {
 				float: left;
 			}
-			footer h3:last-of-type {
+			.textinfo h3:last-of-type {
 				float: right;
 			}
-			footer b {
+			.textinfo b {
 				font-weight: bold;
 				float: none !important;
 			}
@@ -113,7 +146,10 @@ a{ color: #a90202; }
 			margin: 0;
 		}
 		.popover ul li p {
-			margin: 5px 0 0;
+			margin: 5px 0 8px;
+		}
+		.popover ul li p:last-of-type {
+			margin-bottom: 0;
 		}
 .popover {
 	padding-bottom: 40px;

@@ -199,33 +199,40 @@
 		}
 		public function main() {
 			echo '<!DOCTYPE html>
-			
-			<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-				<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-					<meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no; maximum-scale=1.0;" />
-					<link rel="icon" type="image/png" href="/favicon.png" />
-					<title>Textlr</title>
-					<link rel="stylesheet" type="text/css" href="/index.css" />
-					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-					<script src="/textinputs.js"></script>
-					<script src="/date.js"></script>
-					<script src="/index.js"></script>
-					
-				</head>
-				<body>
-					<div id="wrapper">
-						<div id="typist">
-							<header id="head">
-								<h1>Textlr</h1><h2>— All your text are belong to us</h2>
-							</header>
-							<form method="post" id="form" action="stuff.php">
-								<textarea id="text" name="text" placeholder="Ready to start writing? Just select here!"></textarea>
-								<input type="submit" id="submit" name="submit" value="Get a Link" />
-							</form>
-						</div>
-					</div>
-				</body>
-			</html>';
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no; maximum-scale=1.0;" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<title>Textlr</title>
+		<link rel="stylesheet" type="text/css" href="/index.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="/textinputs.js"></script>
+		<script src="/date.js"></script>
+		<script src="/index.js"></script>
+
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="typist">
+				<header id="head">
+					<h1>Textlr</h1><h2>All your text are belong to us</h2>
+				</header>
+				<form method="post" id="form" action="stuff.php">
+					<textarea id="text" name="text" placeholder="Ready to start writing? Just select here!"></textarea>
+					<input type="submit" id="submit" name="submit" value="Get a Link" />
+				</form>
+			</div>
+		</div>
+		<footer>
+			<ul>
+				<li><a href="#" onclick="help();">Help</a></li>
+				<li><a href="#" onclick="commands();">Commands</a></li>
+				<li><a href="/donate.html">Donate</a></li>
+				<li><a href="https://github.com/Zyber17/Textlr">I\'m open source!</a></li>
+			</ul>
+		</footer>
+	</body>
+</html>';
 		}
 	}
 ?>
