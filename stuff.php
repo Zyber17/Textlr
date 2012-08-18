@@ -54,7 +54,7 @@
 			
 			if(mysql_num_rows($search) == 0) {
 				echo $errorhtml;
-				exit;
+				exit; 
 			}else{
 				$answer = mysql_fetch_assoc($search);
 				if($isplain) {
@@ -63,8 +63,8 @@
 					}else {
 						$fname = $answer['short_url'];
 					}
-					header('Content-disposition: attachment; filename='.$fname.'.txt');
-					header('Content-type: text/plain');
+					header('Content-type: text/plain; charset= UTF-8');
+					header('Content-disposition: attachment; filename='.htmlspecialchars_decode(urlencode($fname)).'.txt');
 					echo($answer['plaintext']);
 				}else{
 					$html1 = '<!DOCTYPE html>
@@ -118,7 +118,7 @@
 				mysql_query($query, $con);
 				
 				if ($title) {
-					$slug = preg_replace('/ +/', '_', $title);
+					$slug = preg_replace('/ +/', '_', $md["title"]);
 					$slug = preg_replace('/[^\w-]/', '', $slug);
 					$slug = urlencode($slug);
 					$location = $slug.'/'.$ran;
@@ -181,6 +181,7 @@
 			preg_match('/(?<!.)(^(\#{1} ?([^#].+?) ?\#?)$)/sm', $text, $title); # Is there a Markdown H1 on the very first line? If so, let's snatch it up.
 			$text = preg_replace('/(?<!.)(^(\#{1} ?([^#].+?) ?\#?)$)/sm', '', $text); # There's no use repeating the H1 twice, so let's just take it out of the text.
 			$text = htmlspecialchars($text, ENT_QUOTES);
+			$title = htmlspecialchars($title[3], ENT_QUOTES);
 			$text = preg_replace('/&gt;/', '>', $text);
 			$text = Markdown($text);
 			
@@ -189,7 +190,7 @@
 				echo ($title ? '<h1 class="title">'.$title[3].'</h1>' : '').$text;
 			} else {
 				if ($title) {
-					$array = array('title' => $title[3],
+					$array = array('title' => $title,
 					'text' => $text);
 					return $array;
 				}else {
