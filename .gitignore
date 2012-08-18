@@ -16,6 +16,7 @@ xcuserdata
 # svn & cvs
 .svn
 CVS
+
 Textlr.esproj/Project.espressostorage
 Textlr.esproj/user.ZCorbett.espressostorage
 todo.md
@@ -24,3 +25,4 @@ thanks.html
 test.php
 Textlr.esproj/user.Zackary.espressostorage
 preg.php
+soon
