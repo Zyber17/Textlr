@@ -187,7 +187,7 @@
 			
 			
 			if ($echo) {
-				echo ($title ? '<h1 class="title">'.$title[3].'</h1>' : '').$text;
+				echo ($title ? '<h1 class="title">'.$title.'</h1>' : '').$text;
 			} else {
 				if ($title) {
 					$array = array('title' => $title,
