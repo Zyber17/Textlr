@@ -9,7 +9,19 @@
 			
 			$code = htmlspecialchars($code, ENT_QUOTES);
 			$code = mysql_real_escape_string($code);
-			
+
+			$dark = '<script>
+					function darkorlight() {
+    					var localtime = new Date();
+    					var hours = localtime.getHours();
+    					var minutes = localtime.getMinutes();
+
+    					if((hours == 20 && minutes >= 30) || (hours > 20) || (hours <= 4)) {
+    						document.body.className = "dark";
+   						}
+					}
+					</script>';
+
 			$errorhtml = '<!DOCTYPE html>
 			
 			<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -18,8 +30,9 @@
 					<link rel="icon" type="image/png" href="/favicon.png" />
 					<title>Textlr: Text Not Found</title>
 					<link rel="stylesheet" type="text/css" href="/page.css" />
+					'.$dark.'
 				</head>
-				<body>
+				<body onload="darkorlight();">
 					<div id="wrapper">
 						<article>
 							<h1 class="fourohfour">404: Oh noes! That text doesn\'t exist.<br/><a href="/" alt="Textlr">Go Home?</a>
@@ -75,8 +88,9 @@
 							<link rel="icon" type="image/png" href="/favicon.png" />
 							<title>Textlr'.($answer['title'] ? ': '.$answer['title'] : '').'</title>
 							<link rel="stylesheet" type="text/css" href="/page.css" />
-						</head>
-						<body>
+							'.$dark.'
+					</head>
+					<body onload="darkorlight();">
 							<div id="wrapper">
 							<article>';
 					if ($answer['title']) {
@@ -198,6 +212,17 @@
 				}
 			}
 		}
+		#Lolno
+		// private function darkorlight() {
+		// 	$localtime = localtime(time(), true);
+
+		// 	#if the local time is 8:30 to 8:59:59 or if the local time is 9:00 or later or if the local time is 0:00 to 4:59
+		// 	if (($localtime['tm_hour'] == 20 && $localtime['tm_min'] >= 30) || ($localtime['tm_hour'] > 20) || ($localtime['tm_hour'] <= 4)) {
+		// 		return true;
+		// 	} else {
+		// 		return false;
+		// 	}
+		// }
 		public function main() {
 			echo '<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
