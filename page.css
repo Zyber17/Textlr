@@ -6,7 +6,13 @@ body {
 	text-align: left;
 	line-height: 1.7;
 }
-a{ color: #a90202; }
+	.dark, body.dark #typist textarea, body.dark #url input {
+		background: #222;
+		color: #dfdfdf;
+	}
+a{color: #a90202;}
+	body.dark a{color: #5cb1e4;}
+
 #wrapper {
 	position: relative;
 	padding-top: 40px;
@@ -24,6 +30,9 @@ blockquote {
 	margin-left: 0;
 	padding-left: 15px;
 }
+	body.dark blockquote {
+		border-color: #555;
+	}
 @media only screen and (device-width: 1024px) and (device-height: 768px), only screen and (device-width: 320px) and (device-height: 480px){
 	body {
 		font-size: 18px;
