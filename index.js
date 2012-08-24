@@ -1,4 +1,16 @@
 $(document).ready(function() {
+
+	function darkorlight() {
+    	var localtime = new Date();
+    	var hours = localtime.getHours();
+    	var minutes = localtime.getMinutes();
+
+    	if((hours == 20 && minutes >= 30) || (hours > 20) || (hours <= 4)) {
+    		document.body.className = 'dark';
+   		}
+	}
+	darkorlight();
+
 	//Something I found on jQuery, detects for an iPhone/iPad
 	
 	var text = $('#text');
