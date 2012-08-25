@@ -245,6 +245,7 @@ button.okay {
 @media only screen and (device-width: 1024px) and (device-height: 768px) {
 	#typist textarea {
 		font-size: 18px;
+		-webkit-overflow-scrolling: touch;
 	}
 }
 @media only screen and (device-width: 320px) and (device-height: 480px) {
@@ -260,6 +261,9 @@ button.okay {
 		height: 160px;
 		margin-bottom: 50px;
 		-webkit-overflow-scrolling: touch;
+	}
+	footer {
+		display: none;
 	}
 }
 @media only screen and (device-width: 320px) and (device-height: 480px) and (orientation: landscape){
