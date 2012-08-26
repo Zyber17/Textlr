@@ -3,6 +3,8 @@
 	if($_POST['markdown']) { Textlr::markdown($_POST['markdown'],true); }
 	class Textlr {
 		public function load($code) {
+			ob_start("ob_gzhandler");
+
 			require_once('db.php');
 			$con = mysql_connect($dbinfo['host'], $dbinfo['user'], $dbinfo['pass']) or die(mysql_error());
 			$db = mysql_select_db($dbinfo['db'], $con) or die(mysql_error());
@@ -10,36 +12,10 @@
 			$code = htmlspecialchars($code, ENT_QUOTES);
 			$code = mysql_real_escape_string($code);
 
-			$dark = '<script>
-					function darkorlight() {
-    					var localtime = new Date();
-    					var hours = localtime.getHours();
-    					var minutes = localtime.getMinutes();
-
-    					if((hours == 20 && minutes >= 30) || (hours > 20) || (hours <= 4)) {
-    						document.body.className = "dark";
-   						}
-					}
-					</script>';
+			$dark = '<script>function darkorlight(){var localtime=new Date();var hours=localtime.getHours();var minutes=localtime.getMinutes();if((hours==20&&minutes>=30)||(hours>20)||(hours<=4)){document.body.className="dark";}}</script>';
 
 			$errorhtml = '<!DOCTYPE html>
-			
-			<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-				<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-					<meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no; maximum-scale=1.0;" />
-					<link rel="icon" type="image/png" href="/favicon.png" />
-					<title>Textlr: Text Not Found</title>
-					<link rel="stylesheet" type="text/css" href="/page.css" />
-					'.$dark.'
-				</head>
-				<body onload="darkorlight();">
-					<div id="wrapper">
-						<article>
-							<h1 class="fourohfour">404: Oh noes! That text doesn\'t exist.<br/><a href="/" alt="Textlr">Go Home?</a>
-						</article>
-					</div>
-				</body>
-			</html>';
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no; maximum-scale=1.0;" /><link rel="icon" type="image/png" href="/favicon.png" /><title>Textlr: Text Not Found</title><link rel="stylesheet" type="text/css" href="/page.css" />'.$dark.'</head><body onload="darkorlight();"><div id="wrapper"><article><h1 class="fourohfour">404: Oh noes! That text doesn\'t exist.<br/><a href="/" alt="Textlr">Go Home?</a></article></div></body></html>';
 			
 			if(strlen($code) == 5) {
 				$realcode = $code;
@@ -81,25 +57,7 @@
 					echo($answer['plaintext']);
 				}else{
 					$html1 = '<!DOCTYPE html>
-					
-					<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-						<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-							<meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no; maximum-scale=1.0;" />
-							<link rel="icon" type="image/png" href="/favicon.png" />
-							<title>Textlr'.($answer['title'] ? ': '.$answer['title'] : '').'</title>
-							<link rel="stylesheet" type="text/css" href="/page.css" />
-							'.$dark.'
-					</head>
-					<body onload="darkorlight();">
-							<div id="wrapper">
-							<article>';
-					if ($answer['title']) {
-						$title = '<h1 class="title">'.$answer['title'].'</h1>';
-					}
-					$html2 = '</article>
-							</div>
-						</body>
-					</html>';
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no; maximum-scale=1.0;" /><link rel="icon" type="image/png" href="/favicon.png" /><title>Textlr'.($answer['title'] ? ': '.$answer['title'] : '').'</title><link rel="stylesheet" type="text/css" href="/page.css" />'.$dark.'</head><body onload="darkorlight();"><div id="wrapper"><article>';if ($answer['title']) {$title = '<h1 class="title">'.$answer['title'].'</h1>';}$html2 = '</article></div></body></html>';
 					echo $html1.($answer['title'] ? $title : '').$answer['text'].$html2;
 				}
 			}
@@ -224,41 +182,9 @@
 		// 	}
 		// }
 		public function main() {
+			ob_start("ob_gzhandler");
 			echo '<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-	<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no; maximum-scale=1.0;" />
-		<link rel="icon" type="image/png" href="/favicon.png" />
-		<title>Textlr</title>
-		<link rel="stylesheet" type="text/css" href="/index.css" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="/textinputs.js"></script>
-		<script src="/date.js"></script>
-		<script src="/index.js"></script>
-
-	</head>
-	<body>
-		<div id="wrapper">
-			<div id="typist">
-				<header id="head">
-					<h1>Textlr</h1><h2>All your text are belong to us</h2>
-				</header>
-				<form method="post" id="form" action="stuff.php">
-					<textarea id="text" name="text" placeholder="Ready to start writing? Just select here!"></textarea>
-					<input type="submit" id="submit" name="submit" value="Get a Link" />
-				</form>
-			</div>
-		</div>
-		<footer>
-			<ul>
-				<li><a href="#" onclick="help();">Help</a></li>
-				<li><a href="#" onclick="commands();">Commands</a></li>
-				<li><a href="/donate.html">Donate</a></li>
-				<li><a href="https://github.com/Zyber17/Textlr">I\'m open source!</a></li>
-			</ul>
-		</footer>
-	</body>
-</html>';
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no; maximum-scale=1.0;" /><link rel="icon" type="image/png" href="/favicon.png" /><title>Textlr</title><link rel="stylesheet" type="text/css" href="/index.css" /><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script><script src="/textinputs.js"></script><script src="/date.js"></script><script src="/index.js"></script></head><body><div id="wrapper"><div id="typist"><header id="head"><h1>Textlr</h1><h2>All your text are belong to us</h2></header><form method="post" id="form" action="stuff.php"><textarea id="text" name="text" placeholder="Ready to start writing? Just select here!"></textarea><input type="submit" id="submit" name="submit" value="Get a Link" /></form></div></div><footer><ul><li><a href="#" onclick="help();">Help</a></li><li><a href="#" onclick="commands();">Commands</a></li><li><a href="/donate.html">Donate</a></li><li><a href="https://github.com/Zyber17/Textlr">I\'m open source!</a></li></ul></footer></body></html>';
 		}
 	}
 ?>
