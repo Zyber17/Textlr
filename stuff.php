@@ -52,10 +52,23 @@
 					}else {
 						$fname = $answer['short_url'];
 					}
+
+					$downloads = $answer['downloads'];
+					$downloads++;
+					$id = $answer['id'];
+					$updatequery = "UPDATE  `textlr`.`uploads` SET  `downloads` =  $downloads WHERE  `uploads`.`id` = $id";
+					mysql_query($updatequery, $con);
+
 					header('Content-type: text/plain; charset= UTF-8');
 					header('Content-disposition: attachment; filename='.htmlspecialchars_decode(urlencode($fname)).'.txt');
 					echo($answer['plaintext']);
 				}else{
+					$views = $answer['views'];
+					$views++;
+					$id = $answer['id'];
+					$updatequery = "UPDATE  `textlr`.`uploads` SET  `views` =  $views WHERE  `uploads`.`id` = $id";
+					mysql_query($updatequery, $con);
+
 					$html1 = '<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no; maximum-scale=1.0;" /><link rel="icon" type="image/png" href="/favicon.png" /><title>Textlr'.($answer['title'] ? ': '.$answer['title'] : '').'</title><link rel="stylesheet" type="text/css" href="/page.css" />'.$dark.'</head><body onload="darkorlight();"><div id="wrapper"><article>';if ($answer['title']) {$title = '<h1 class="title">'.$answer['title'].'</h1>';}$html2 = '</article></div></body></html>';
 					echo $html1.($answer['title'] ? $title : '').$answer['text'].$html2;
