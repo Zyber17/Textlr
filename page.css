@@ -33,12 +33,12 @@ blockquote {
 	body.dark blockquote {
 		border-color: #555;
 	}
-@media only screen and (device-width: 1024px) and (device-height: 768px), only screen and (device-width: 320px) and (device-height: 480px){
+@media only screen and (device-width: 1024px) and (device-height: 768px), only screen and (max-device-width: 480px) {
 	body {
 		font-size: 18px;
 	}
 }
-@media only screen and (device-width: 320px) and (device-height: 480px){
+@media only screen and (max-device-width: 480px) {
 	#wrapper {
 		padding-top: 0;
 	}

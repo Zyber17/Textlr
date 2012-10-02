@@ -248,7 +248,7 @@ button.okay {
 		-webkit-overflow-scrolling: touch;
 	}
 }
-@media only screen and (device-width: 320px) and (device-height: 480px) {
+@media only screen and (max-device-width: 480px) {
 	#wrapper {
 		padding-top: 0;
 		width: 280px;
@@ -266,7 +266,7 @@ button.okay {
 		display: none;
 	}
 }
-@media only screen and (device-width: 320px) and (device-height: 480px) and (orientation: landscape){
+@media only screen and (max-device-width: 480px) and (orientation: landscape){
 	#wrapper {
 		width: 440px;
 	}
