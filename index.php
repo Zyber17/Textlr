@@ -1,8 +1,8 @@
 <?php
-	require 'stuff.php';
+	require 'interface.php';
 	if($_GET['key']) {
-		Textlr::load($_GET['key']);
+		UI::load($_GET['key']);
 	}else{
-		Textlr::main();
+		UI::main();
 	}
 ?>
