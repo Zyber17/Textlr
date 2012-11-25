@@ -1469,7 +1469,8 @@ class Markdown_Parser {
 	}
 	function _doAutoLinks_url_callback($matches) {
 		$url = $this->encodeAttribute($matches[1]);
-		$link = "<a href=\"$url\">$url</a>";
+		$httpsans = preg_replace('/https?:\/\//', '', $url);
+		$link = "<a href=\"$url\">$httpsans</a>";
 		return $this->hashPart($link);
 	}
 	function _doAutoLinks_email_callback($matches) {
