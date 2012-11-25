@@ -21,10 +21,10 @@
 				$realcode = $code;
 				$isplain = false;
 			}elseif (strlen($code) > 5) {
-				preg_match('/([\w-]+\/)?(\w{5})(\.txt)?(?!.)/', $code, $codematch);
+				preg_match('/(?:(?:[\w-]+\/)|(?<!.))(\w{5})(\.txt)?(?!.)/', $code, $codematch);
 				if($codematch) {
-					$realcode = $codematch[2];
-					if ($codematch[3] == '.txt') {
+					$realcode = $codematch[1];
+					if ($codematch[2] == '.txt') {
 						$isplain = true;
 					}else {
 						$isplain = false;
@@ -168,6 +168,9 @@
 			$text = htmlspecialchars($text, ENT_QUOTES);
 			$title = htmlspecialchars($title[3], ENT_QUOTES);
 			$text = preg_replace('/&gt;/', '>', $text);
+			$text = preg_replace('/(`.+?)&lt;(.+?`)/', '$1<$2', $text);
+			$text = preg_replace('/&lt;((?:[\w-\.]+)@(?:(?:[\w]+\.)+)(?:[a-zA-Z]{2,4}))>/', '<$1>', $text);
+			$text = preg_replace('/&lt;(https?:\/\/[a-zA-Z0-9-\.]+([a-zA-Z]{2,4})[\w\/\?\#\.]+)>/', '<$1>', $text);
 			$text = Markdown($text);
 			
 			
