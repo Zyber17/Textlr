@@ -9,7 +9,7 @@ function rotate() {
 					"The back- & front-end were partially rewritten.",
 					"Bug or suggestions? Tell @Textlr on Twitter.",
 					"Please, don't forget to test on mobile devices.",
-					"Yep. There's now an API.",
+					"Yep. There's an API now.",
 					"All texts will be deleted at the end of the beta."];
 	banner.fadeOut(500, function() {
 		$(this).text(messages[i]);
