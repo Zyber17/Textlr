@@ -11,9 +11,12 @@ body {
 		background: #222;
 		color: #dfdfdf;
 	}
-a{color: #a90202;}
-	body.dark a{color: #5cb1e4;}
-
+a {
+	color: #a90202;
+}
+	body.dark a {
+		color: #5cb1e4;
+	}
 #brand {
 	height: 23px;
 	padding: 5px 0;

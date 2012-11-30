@@ -33,11 +33,9 @@ $(document).ready(function() {
 	//Mobile safari can't handle the custom key events
 	if(!$.browser.SafariMobile) {
 		
-		
 		//On load, tell the user about JS fanciness and focus text box
 		elem.text.attr("placeholder",(elem.text.attr("placeholder")+" Need help? Type: !help."));
 		elem.text.focus();
-		
 		
 		//Ajax stuff
 		$('#form').submit(function(event) {

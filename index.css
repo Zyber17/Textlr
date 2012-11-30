@@ -22,31 +22,6 @@
 	0% {opacity: 0;}
 	100% {opacity: 1;}
 }
-
-@-webkit-keyframes fadeOut {
-	0% {opacity: 1;}
-	100% {opacity: 0;}
-}
-
-@-moz-keyframes fadeOut {
-	0% {opacity: 1;}
-	100% {opacity: 0;}
-}
-
-@-ms-keyframes fadeOut {
-	0% {opacity: 1;}
-	100% {opacity: 0;}
-}
-
-@-o-keyframes fadeOut {
-	0% {opacity: 1;}
-	100% {opacity: 0;}
-}
-
-@keyframes fadeOut {
-	0% {opacity: 1;}
-	100% {opacity: 0;}
-}
 body {
 	background: #f5f5f5;
 	font-family:"Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
@@ -55,7 +30,7 @@ body {
 	text-align: left;
 	margin: 0;
 }
-	body.dark, body.dark #typist textarea, body.dark .box input {
+	body.dark, body.dark #typist textarea, body.dark #url input {
 		background: #222;
 		color: #dfdfdf;
 	}
@@ -109,22 +84,14 @@ a{color: #a90202;}
 #typist h1 {
 	font-size: 32px;
 	font-weight: bold;
+	margin-right: 8px;
 }
-#typist h1, #typist h2, #typist #mark {
+#typist h1, #typist h2 {
 	display: inline-block;
-}
-#typist #mark {
-	height: 16px;
-	width: 26px;
-	background: url('markdown-mark-solid.png') no-repeat;
-	text-indent: -9999px;
-	padding: 0;
-	margin: 0;
-	margin-left: 8px;
 }
 	#typist h2:before {
 		content: "—";`
-		padding: 0 8px;
+		margin-right: 8px;
 	}
 	#typist textarea {
 		width: 100%;
@@ -298,7 +265,7 @@ button.okay {
 	button.okay:active {
 		opacity: 0.8;
 	}
-.dim {
+#dim {
 	top: 0;
 	left: 0;
 	position: fixed;
@@ -311,17 +278,10 @@ button.okay {
 	-o-animation: fadeIn .4s linear;
 	animation: fadeIn .4s linear;
 }
-	body.dark .dim {
+	body.dark #dim {
 		background: rgba(100,100,100,0.3);
 	}
-	.dim.hide {
-		-webkit-animation: fadeOut .4s linear;
-		-moz-animation: fadeOut .4s linear;
-		-ms-animation: fadeOut .4s linear;
-		-o-animation: fadeOut .4s linear;
-		animation: fadeOut .4s linear;
-	}
-.box {
+#url {
 	position: relative;
 	margin: 0 auto;
 	top: 221px;
@@ -332,11 +292,11 @@ button.okay {
 	border: 1px solid #dfdfdf;
 	-webkit-transition
 }
-	body.dark .box {
+	body.dark #url {
 		background-color: #111;
 		border-color: #555;
 	}
-	.box input {
+	#url input {
 		width: 504px;
 		height: 28px;
 		font-size: 28px;
@@ -349,33 +309,33 @@ button.okay {
 		border: none;
 		padding: 5px 2px;
 	}
-	.box a {
+	#url a {
 		display: block;
 		color: #111;
 		font-size: 20px;
 	}
-		body.dark .box a {
+		body.dark #url a {
 			color: #555;
 		}
-	.box a {
+	#url a {
 		float: left;
 	}
-	.box #share {
+	#url #share {
 		float: right;
 	}
-		.box #share ul {
+		#url #share ul {
 			padding: 0;
 			margin: 0;
 			list-style: none;
 		}
-		.box #share ul li{
+		#url #share ul li{
 			display: block;
 			float: left;
 			padding: 0;
 			margin: 0;
 			margin-right: 10px;
 		}
-			.box #share ul li:last-of-type {
+			#url #share ul li:last-of-type {
 				margin-right: 0;
 			}
 .fade {
