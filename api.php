@@ -39,9 +39,12 @@ class Textlr {
 			}
 			mysql_query($updatequery, $con);
 		}
+		if($client_key != "GXc9vHBjYMZ3KJE6M79X") {
+			Textlr::stats($dbinfo, 3);
+		}
 	}
 	public function up($text,$client_key) {
-		require_once('db.php');
+		require 'db.php';
 		Textlr::valid($dbinfo,$client_key,"post");
 
 		if($text != null && strlen($text) > 2) {
@@ -62,9 +65,8 @@ class Textlr {
 		
 		$ran = Textlr::generatecode($dbinfo);
 		
-		
 		if($ran != 'Error') {
-		
+
 			$query = "INSERT INTO `uploads` (`id`, `text`, `plaintext`, `short_url`, `title`) VALUES (NULL, '$marked', '$ptext', '$ran', '$title');";
 		
 			mysql_query($query, $con);
@@ -78,7 +80,7 @@ class Textlr {
 				$location = $ran;
 			}
 			
-			
+			Textlr::stats($dbinfo, 0);
 			$ajaxecho = array('url' => $location);
 			if ($title) {
 				$ajaxecho['title'] = $md['title'];
@@ -143,7 +145,7 @@ class Textlr {
 		
 	}
 	public function markdown($text) {
-		include_once "markdown.php";
+		require_once "markdown.php";
 		preg_match('/(?<!.)(^(\#{1} ?([^#].+?) ?\#?)$)/sm', $text, $title); # Is there a Markdown H1 on the very first line? If so, let's snatch it up.
 		$text = preg_replace('/(?<!.)(^(\#{1} ?([^#].+?) ?\#?)$)/sm', '', $text); # There's no use repeating the H1 twice, so let's just take it out of the text.
 		$text = htmlspecialchars($text, ENT_QUOTES);
@@ -211,7 +213,7 @@ class Textlr {
 		}else{
 			$answer = mysql_fetch_assoc($search);
 			if($isplain == "true") {
-				
+				Textlr::stats($dbinfo, 2);
 				$downloads = $answer['downloads'];
 				$downloads++;
 				$id = $answer['id'];
@@ -233,6 +235,7 @@ class Textlr {
 				}
 				exit;		
 			}else{
+				Textlr::stats($dbinfo, 1);
 				$views = $answer['views'];
 				$views++;
 				$id = $answer['id'];
@@ -254,6 +257,57 @@ class Textlr {
 				exit;
 			}
 		}
+	}
+
+	public function stats($dbinfo, $kind){
+		$con = mysql_connect($dbinfo['host'], $dbinfo['user'], $dbinfo['pass']) or die(mysql_error());
+		$db = mysql_select_db($dbinfo['db'], $con) or die(mysql_error());
+
+		$date = date("d F, Y"); //"01 Janurary, 2013"
+
+		$finddate  = "SELECT * FROM `stats` WHERE `date` = '".$date."'";
+		$search = mysql_query($finddate, $con);
+
+		if(mysql_num_rows($search) == 0) {
+			$adddate = "INSERT INTO `stats` (`date`) VALUES ('$date');";
+			mysql_query($adddate, $con);
+			$search = mysql_query($finddate, $con);
+		}
+
+		$assoc = mysql_fetch_assoc($search);
+		$id = $assoc['id'];
+
+		$trow  = "SELECT * FROM `stats` WHERE `id` = '1'";
+		$tsearch = mysql_query($trow, $con);
+		$tassoc = mysql_fetch_assoc($tsearch);
+
+		if($kind == 0) { //Upload
+			$count = $assoc['uploads'] + 1;
+			$updatequery = "UPDATE  `stats` SET  `uploads` =  $count WHERE `id` = $id";
+
+			$tcount = $tassoc['uploads'] + 1;
+			$tupdatequery = "UPDATE  `stats` SET  `uploads` =  $tcount WHERE `id` = 1";
+		}else if($kind == 1) { //View
+			$count = $assoc['views'] + 1;
+			$updatequery = "UPDATE  `stats` SET  `views` =  $count WHERE `id` = $id";
+
+			$tcount = $tassoc['views'] + 1;
+			$tupdatequery = "UPDATE  `stats` SET  `views` =  $tcount WHERE `id` = 1";
+		}else if($kind == 2) { //Download
+			$count = $assoc['downloads'] + 1;
+			$updatequery = "UPDATE  `stats` SET  `downloads` =  $count WHERE `id` = $id";
+
+			$tcount = $tassoc['downloads'] + 1;
+			$tupdatequery = "UPDATE  `stats` SET  `downloads` =  $tcount WHERE `id` = 1";
+		}else if($kind == 3) { //API Call
+			$count = $assoc['calls'] + 1;
+			$updatequery = "UPDATE  `stats` SET  `calls` =  $count WHERE `id` = $id";
+
+			$tcount = $tassoc['calls'] + 1;
+			$tupdatequery = "UPDATE  `stats` SET  `calls` =  $tcount WHERE `id` = 1";
+		}
+		mysql_query($updatequery, $con);
+		mysql_query($tupdatequery, $con);
 	}
 }
 
