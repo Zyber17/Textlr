@@ -14,7 +14,7 @@ $(document).ready(function() {
     	var minutes = localtime.getMinutes();
 
     	if((hours == 20 && minutes >= 30) || (hours > 20) || (hours <= 4)) {
-    		elem.body.className = 'dark';
+    		elem.body.addClass('dark');
    		}
 	}
 	darkorlight();
