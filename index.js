@@ -97,7 +97,7 @@ $(document).ready(function() {
 						title.adn = "";
 						adnurl = parsed.url;
 					}
-					elem.body.append('<div id="dim"><div id="url"><input type="text" value="http://textlr.org/'+parsed.url+'" onclick="this.focus();this.select();" readonly="readonly" /><a href="'+parsed.url+'">See the uploaded text.</a><div id="share"><ul><li><a href="https://twitter.com/share?url=http://textlr.org/'+parsed.url+title.twitter+'&via=Textlr" target="_blank">Twitter</a></li><li><a href="https://alpha.app.net/intent/post?text='+title.adn+'http://textlr.org/'+adnurl+'">App.net</a></li></ul></div></div></div>');
+					elem.body.append('<div class="dim"><div class="box"><input type="text" value="http://textlr.org/'+parsed.url+'" onclick="this.focus();this.select();" readonly="readonly" /><a href="'+parsed.url+'">See the uploaded text.</a><div id="share"><ul><li><a href="https://twitter.com/share?url=http://textlr.org/'+parsed.url+title.twitter+'&via=Textlr" target="_blank">Twitter</a></li><li><a href="https://alpha.app.net/intent/post?text='+title.adn+'http://textlr.org/'+adnurl+'">App.net</a></li></ul></div></div></div>');
 					$('#url input').focus().select();
 				}else{
 					alert('Error');
