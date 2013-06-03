@@ -22,6 +22,46 @@
 	0% {opacity: 0;}
 	100% {opacity: 1;}
 }
+@-webkit-keyframes fadeOut {
+	0% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+@-moz-keyframes fadeOut {
+	0% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+@-ms-keyframes fadeOut {
+	0% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+@-o-keyframes fadeOut {
+	0% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+	0% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+.show {
+	-webkit-animation: fadeIn .4s linear;
+	-moz-animation: fadeIn .4s linear;
+	-ms-animation: fadeIn .4s linear;
+	-o-animation: fadeIn .4s linear;
+	animation: fadeIn .4s linear;
+}
+.hide {
+	-webkit-animation: fadeOut .4s linear;
+	-moz-animation: fadeOut .4s linear;
+	-ms-animation: fadeOut .4s linear;
+	-o-animation: fadeOut .4s linear;
+	animation: fadeOut .4s linear;
+}
+
 body {
 	background: #f5f5f5;
 	font-family:"Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
@@ -30,50 +70,12 @@ body {
 	text-align: left;
 	margin: 0;
 }
-	body.dark, body.dark #typist textarea, body.dark #url input {
+	body.dark, body.dark #typist textarea, body.dark .box input {
 		background: #222;
 		color: #dfdfdf;
 	}
 a{color: #a90202;}
 	body.dark a{color: #5cb1e4;}
-
-#brand {
-		height: 20px;
-		padding: 5px 0;
-		background: #a90202;
-		border-bottom: 1px solid #dfdfdf;
-		color: #fff;
-	}
-		body.dark #brand {
-			border-color: #555;
-		}
-		#brand #center {
-			max-width: 555px;
-			margin: 0 auto;
-			height: 16px;
-			font-size: 16px;
-		}
-			#brand #beta {
-				float: left;
-				height: 16px;
-			}
-			#brand #betainfo {
-				max-width: 342px;
-				height: 16px;
-				margin: 0 3px;
-				float: left;
-			}
-			#brand a {
-				color: #fff;
-				text-decoration: none;
-				line-height: 1;
-				background-color: rgba(0,0,0,0.3);
-				padding: 2px;
-				border-radius: 3px;
-				float: right;
-				height: 16px;
-				display: block;
-			}
 
 #wrapper {
 	position: relative;
@@ -84,14 +86,13 @@ a{color: #a90202;}
 #typist h1 {
 	font-size: 32px;
 	font-weight: bold;
-	margin-right: 8px;
 }
 #typist h1, #typist h2 {
 	display: inline-block;
 }
 	#typist h2:before {
-		content: "—";`
-		margin-right: 8px;
+		content: "—";
+		padding: 0 8px;
 	}
 	#typist textarea {
 		width: 100%;
@@ -110,6 +111,7 @@ a{color: #a90202;}
 		font-family: "Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
 	}
 	#typist input {
+		font-family: "Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
 		padding: 0;
 		margin: 11px 0;
 		height: 40px;
@@ -117,8 +119,8 @@ a{color: #a90202;}
 		display: block;
 		background-color: #fff;
 		cursor: pointer;
-		font-size: 16px;
-		font-weight: bold;
+		font-size: 17px;
+		font-weight: 500;
 		color: #111;
 		border: 1px solid #dfdfdf;
 		-webkit-appearance: none;
@@ -186,10 +188,63 @@ footer {
 				float: none !important;
 			}
 	
-#preview {
-	line-height: 1.3;
+/*Preview*/
+
+.preview {
+	font-size: 16px;
+	line-height: 1.7;
+}
+	.dark {
+		background: #222;
+		color: #dfdfdf;
+	}
+.preview a {
+	color: #a90202;
+}
+	body.dark .preview  a {
+		color: #5cb1e4;
+	}
+
+	.preview .title {
+		font-size: 42px;
+		margin: 0;
+		margin-bottom: 20px;
+	}
+.preview blockquote {
+	border-left: 7px solid #dfdfdf;
+	margin-left: 0;
+	padding-left: 15px;
+}
+	body.dark .preview  blockquote {
+		border-color: #555;
+	}
+.preview code {
+	border: 1px solid #dfdfdf;
+	padding: 2px;
+	border-radius: 4px;
+	font-size: .95em;
+	display: inline-block;
+	background: #f7f7f7;
+}
+.preview pre>code {
+	display: block;
+	padding: 0 5px;
+}
+	body.dark .preview  code {
+		border-color: #555;
+	}
+@media only screen and (device-width: 1024px) and (device-height: 768px), only screen and (max-device-width: 480px) {
+	.preview {
+		font-size: 18px;
+	}
+}
+@media only screen and (max-device-width: 480px) {
+	.preview {
+		line-height:1.6;
+	}
 }
 
+/*end Preview*/
 .popover h1{
 	font-size: 42px;
 	margin: 10px 0;
@@ -265,23 +320,18 @@ button.okay {
 	button.okay:active {
 		opacity: 0.8;
 	}
-#dim {
+.dim {
 	top: 0;
 	left: 0;
 	position: fixed;
 	height: 100%;
 	width: 100%;
 	background: rgba(0,0,0,0.3);
-	-webkit-animation: fadeIn .4s linear;
-	-moz-animation: fadeIn .4s linear;
-	-ms-animation: fadeIn .4s linear;
-	-o-animation: fadeIn .4s linear;
-	animation: fadeIn .4s linear;
 }
-	body.dark #dim {
+	body.dark .dim {
 		background: rgba(100,100,100,0.3);
 	}
-#url {
+.box {
 	position: relative;
 	margin: 0 auto;
 	top: 221px;
@@ -290,13 +340,12 @@ button.okay {
 	width: 510px;
 	padding: 20px;
 	border: 1px solid #dfdfdf;
-	-webkit-transition
 }
-	body.dark #url {
+	body.dark .box {
 		background-color: #111;
 		border-color: #555;
 	}
-	#url input {
+	.box input {
 		width: 504px;
 		height: 28px;
 		font-size: 28px;
@@ -309,33 +358,33 @@ button.okay {
 		border: none;
 		padding: 5px 2px;
 	}
-	#url a {
+	.box a {
 		display: block;
 		color: #111;
 		font-size: 20px;
 	}
-		body.dark #url a {
+		body.dark .box a {
 			color: #555;
 		}
-	#url a {
+	.box a {
 		float: left;
 	}
-	#url #share {
+	.box #share {
 		float: right;
 	}
-		#url #share ul {
+		.box #share ul {
 			padding: 0;
 			margin: 0;
 			list-style: none;
 		}
-		#url #share ul li{
+		.box #share ul li{
 			display: block;
 			float: left;
 			padding: 0;
 			margin: 0;
 			margin-right: 10px;
 		}
-			#url #share ul li:last-of-type {
+			.box #share ul li:last-of-type {
 				margin-right: 0;
 			}
 .fade {
