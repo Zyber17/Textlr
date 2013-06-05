@@ -70,7 +70,7 @@ body {
 	text-align: left;
 	margin: 0;
 }
-	body.dark, body.dark #typist textarea, body.dark .box input {
+	body.dark, body.dark #typist textarea, body.dark .box.uploaded input, body.dark .box.dialogue .options ul li {
 		background: #222;
 		color: #dfdfdf;
 	}
@@ -331,10 +331,15 @@ button.okay {
 	body.dark .dim {
 		background: rgba(100,100,100,0.3);
 	}
+	.dim #clickdetect {
+		width: 100%;
+		height: 100%;
+	}
 .box {
-	position: relative;
-	margin: 0 auto;
+	position: absolute;
 	top: 221px;
+	left: 50%;
+	margin-left: -275px;
 	height: 56px;
 	background: #fff;
 	width: 510px;
@@ -345,7 +350,7 @@ button.okay {
 		background-color: #111;
 		border-color: #555;
 	}
-	.box input {
+	.box.uploaded input {
 		width: 504px;
 		height: 28px;
 		font-size: 28px;
@@ -358,7 +363,7 @@ button.okay {
 		border: none;
 		padding: 5px 2px;
 	}
-	.box a {
+	.box.uploaded a {
 		display: block;
 		color: #111;
 		font-size: 20px;
@@ -366,27 +371,53 @@ button.okay {
 		body.dark .box a {
 			color: #555;
 		}
-	.box a {
+	.box.uploaded a {
 		float: left;
 	}
-	.box #share {
+	.box.uploaded #share {
 		float: right;
 	}
-		.box #share ul {
+		.box.uploaded #share ul {
 			padding: 0;
 			margin: 0;
 			list-style: none;
 		}
-		.box #share ul li{
+		.box.uploaded #share ul li{
 			display: block;
 			float: left;
 			padding: 0;
 			margin: 0;
 			margin-right: 10px;
 		}
-			.box #share ul li:last-of-type {
+			.box.uploaded #share ul li:last-of-type {
 				margin-right: 0;
 			}
+	.box.dialogue h3{
+		margin: 0;
+		font-weight: 500;
+		font-size: 20px;
+	}
+	.box.dialogue .options {
+			margin-top: 5px;
+		}
+		.box.dialogue .options ul {
+			margin: 0;
+			padding: 0;
+		}
+			.box.dialogue .options ul li{
+				cursor: pointer;
+				background: #f5f5f5;
+				display: block;
+				float: left;
+				width: 250px;
+				list-style: none;
+				text-align: center;
+				font-size: 20px;
+				padding: 5px 0;
+			}
+				.box.dialogue .options ul li:first-of-type{
+					margin-right: 10px;
+				}
 .fade {
 	opacity: 0.6;
 }

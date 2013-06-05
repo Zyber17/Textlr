@@ -1,4 +1,14 @@
-var elem = [];
+var elem = [],fadetime = 400;
+
+function darkorlight() {
+	var localtime = new Date();
+	var hours = localtime.getHours();
+	var minutes = localtime.getMinutes();
+
+	if((hours == 20 && minutes >= 30) || (hours > 20) || (hours <= 4)) {
+		elem.body.addClass('dark');
+	}
+}
 
 $(document).ready(function() {
 
@@ -7,16 +17,9 @@ $(document).ready(function() {
 	elem.typist  = $('#typist');
 	elem.footer  = $('footer');
 	elem.wrapper = $('#wrapper');
+	elem.form    = $('#form');
+	elem.submit  = $('#submit');
 
-	function darkorlight() {
-    	var localtime = new Date();
-    	var hours = localtime.getHours();
-    	var minutes = localtime.getMinutes();
-
-    	if((hours == 20 && minutes >= 30) || (hours > 20) || (hours <= 4)) {
-    		elem.body.addClass('dark');
-   		}
-	}
 	darkorlight();
 
 	//Something I found on jQuery, detects for an iPhone/iPad
@@ -38,10 +41,10 @@ $(document).ready(function() {
 		elem.text.focus();
 		
 		//Ajax stuff
-		$('#form').submit(function(event) {
-		    event.preventDefault();
-		    $('#submit', this).attr('disabled', 'disabled');
-		    $('#text', this).attr('readonly', 'readonly').addClass('fade');
+		elem.form.submit(function(event) {
+			event.preventDefault();
+			elem.submit.attr('disabled', 'disabled');
+			elem.text.attr('readonly', 'readonly').addClass('fade');
 			var text = elem.text.val();
 			$.post('interface.php', {
 				text:text,
@@ -97,8 +100,12 @@ $(document).ready(function() {
 						title.adn = "";
 						adnurl = parsed.url;
 					}
-					elem.body.append('<div class="dim"><div class="box"><input type="text" value="http://textlr.org/'+parsed.url+'" onclick="this.focus();this.select();" readonly="readonly" /><a href="'+parsed.url+'">See the uploaded text.</a><div id="share"><ul><li><a href="https://twitter.com/share?url=http://textlr.org/'+parsed.url+title.twitter+'&via=Textlr" target="_blank">Twitter</a></li><li><a href="https://alpha.app.net/intent/post?text='+title.adn+'http://textlr.org/'+adnurl+'">App.net</a></li></ul></div></div></div>');
-					$('#url input').focus().select();
+					elem.body.append('<div class="dim show"><div id="clickdetect" onclick="newUpload()"></div><div class="box uploaded"><input type="text" value="http://textlr.org/'+parsed.url+'" onclick="this.focus();this.select();" readonly="readonly" /><a href="'+parsed.url+'">See the uploaded text.</a><div id="share"><ul><li><a href="https://twitter.com/share?url=http://textlr.org/'+parsed.url+title.twitter+'&via=Textlr" target="_blank">Twitter</a></li><li><a href="https://alpha.app.net/intent/post?text='+title.adn+'http://textlr.org/'+adnurl+'">App.net</a></li></ul></div></div></div>');
+					elem.dim       =  $('.dim');
+					elem.uploaded  =  $('.uploaded');
+					elem.url       =  $('.box input');
+					elem.url .focus().select();
+					setTimeout('elem.dim.removeClass("show");',fadetime);
 				}else{
 					alert('Error');
 				}
@@ -140,6 +147,39 @@ $(document).ready(function() {
 	});
 	
 });
+
+function newUpload() {
+	if(elem.uploaded.is(':visible')) {
+		elem.uploaded.addClass('hide');
+		setTimeout('finishNewUpload()', fadetime);
+	}
+}
+
+	function finishNewUpload() {
+		elem.dim.append('<div class="box dialogue show"><h3>Would you like to upload another text?</h3><div class="options"><ul><li onclick="newUpload_no()">No</li><li onclick="newUpload_yes()">Yes</li></ul></div></div>');
+		elem.dialogue = $('.dialogue');
+		setTimeout('elem.dialogue.removeClass("show")',fadetime);
+		elem.uploaded.hide().removeClass('hide');
+	}
+
+function newUpload_no() {
+	elem.dialogue.addClass('hide');
+	setTimeout('finishNewUpload_no()', fadetime);
+}
+
+	function finishNewUpload_no() {
+		elem.dialogue.remove();
+		elem.uploaded.show().addClass('show');
+		elem.url .focus().select();
+		setTimeout('elem.uploaded.removeClass("show")',fadetime);
+	}
+
+function newUpload_yes() {
+	elem.submit.removeAttr('disabled');
+	elem.text.removeAttr('readonly').removeClass('fade').val('').focus();
+	elem.dim.addClass('hide');
+	setTimeout('elem.dim.remove()',fadetime)
+}
 
 function preview(notbang) {
 	if($('.preview').length == 0 && $('#url').length == 0) {
