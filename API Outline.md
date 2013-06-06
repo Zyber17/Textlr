@@ -41,6 +41,7 @@ All API requests require the application to include a `client_key` to identify t
 		* Keep in mind that you’ll need to prepend `http://textlr.org/` to the slug.
 * Applicable Errors
 	* `401`: Your API key was invalid.
+	* `403`: The text was too short, it must be longer than two characters.
 	* `507`: Textlr could not find an available URL slug to assign to the text trying to be uploaded.
 
 ----------

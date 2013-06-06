@@ -48,56 +48,68 @@ class Textlr {
 		Textlr::valid($dbinfo,$client_key,"post");
 
 		if($text != null && strlen($text) > 2) {
-		$con = mysql_connect($dbinfo['host'], $dbinfo['user'], $dbinfo['pass']) or die(mysql_error());
-		$db = mysql_select_db($dbinfo['db'], $con) or die(mysql_error());
-		
-		$md = Textlr::markdown($text);
-		
-		$title = '';
-		if (is_array($md)) {
-			$marked = mysql_real_escape_string($md['text']);
-			$title = mysql_real_escape_string($md['title']);
-		}else {
-			$marked = mysql_real_escape_string($md);
-		}
-		
-		$ptext = mysql_real_escape_string($text);
-		
-		$ran = Textlr::generatecode($dbinfo);
-		
-		if($ran != 'Error') {
-
-			$query = "INSERT INTO `uploads` (`id`, `text`, `plaintext`, `short_url`, `title`) VALUES (NULL, '$marked', '$ptext', '$ran', '$title');";
-		
-			mysql_query($query, $con);
+			$con = mysql_connect($dbinfo['host'], $dbinfo['user'], $dbinfo['pass']) or die(mysql_error());
+			$db = mysql_select_db($dbinfo['db'], $con) or die(mysql_error());
 			
-			if ($title) {
-				$slug = preg_replace('/ +/', '_', $md["title"]);
-				$slug = preg_replace('/[^\w-]/', '', $slug);
-				$slug = urlencode($slug);
-				$location = $slug.'/'.$ran;
+			$md = Textlr::markdown($text);
+			
+			$title = '';
+			if (is_array($md)) {
+				$marked = mysql_real_escape_string($md['text']);
+				$title = mysql_real_escape_string($md['title']);
 			}else {
-				$location = $ran;
+				$marked = mysql_real_escape_string($md);
 			}
 			
-			Textlr::stats($dbinfo, 0);
-			$ajaxecho = array('url' => $location);
-			if ($title) {
-				$ajaxecho['title'] = $md['title'];
-			}
-			$response = array('response' => array('code' => 200),
-				'data' => $ajaxecho
-			);
-			if($client_key == "GXc9vHBjYMZ3KJE6M79X"){
-				return $response;
+			$ptext = mysql_real_escape_string($text);
+			
+			$ran = Textlr::generatecode($dbinfo);
+			
+			if($ran != 'Error') {
+
+				$query = "INSERT INTO `uploads` (`id`, `text`, `plaintext`, `short_url`, `title`) VALUES (NULL, '$marked', '$ptext', '$ran', '$title');";
+			
+				mysql_query($query, $con);
+				
+				if ($title) {
+					$slug = preg_replace('/ +/', '_', $md["title"]);
+					$slug = preg_replace('/[^\w-]/', '', $slug);
+					$slug = urlencode($slug);
+					$location = $slug.'/'.$ran;
+				}else {
+					$location = $ran;
+				}
+				
+				Textlr::stats($dbinfo, 0);
+				$ajaxecho = array('url' => $location);
+				if ($title) {
+					$ajaxecho['title'] = $md['title'];
+				}
+				$response = array('response' => array('code' => 200),
+					'data' => $ajaxecho
+				);
+				if($client_key == "GXc9vHBjYMZ3KJE6M79X"){
+					return $response;
+				}else{
+					echo json_encode($response);
+				}
+				exit;
 			}else{
-				echo json_encode($response);
+				$errors = array('errors' => array(
+					'code' => 507, 
+					'message' => "No available URL slug")
+				);
+				if($client_key == "GXc9vHBjYMZ3KJE6M79X"){
+					return $errors;
+				}else{
+					echo json_encode($errors);
+				}
+				exit;
 			}
-			exit;
 		}else{
 			$errors = array('errors' => array(
-				'code' => 507, 
-				'message' => "No available URL slug")
+				'code' => 403, 
+				'message' => "Text too short, it must be longer than three characters.")
 			);
 			if($client_key == "GXc9vHBjYMZ3KJE6M79X"){
 				return $errors;
@@ -105,8 +117,8 @@ class Textlr {
 				echo json_encode($errors);
 			}
 			exit;
+		
 		}
-	}
 		
 	}
 	private function random() {			
