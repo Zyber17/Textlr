@@ -1,3 +1,11 @@
-Textlr is a simple text uploading service. It uses [Markdown](http://daringfireball.net/projects/markdown/) to style the uploaded text, and has other nifty features that get out of your way when writing (like `!commands`). Textlr is available to use at [textlr.org](http://textlr.org/).
+# Simple Text Uploading
 
-Installing it is pretty easy. In fact, anyone who knows what GitHub is has a pretty good shot of setting it up on a server just by reading the source code. Still, should anyone want help setting it up, email me at <hello@zyber17.com> and I’ll be glad to help if I can.
+Textlr is a open source platform for uploaded text for easy sharing. It uses [Markdown](http://daringfireball.net/projects/markdown/) and has other nifty features baked in. The official Textlr web service is available to use at [textlr.org](http://textlr.org/), but anyone is free to host it.
+
+## Roadmap
+
+1. Deal with errors that occur over AJAX better.
+
+## Installation
+
+Installing it is rather easy. Just change the credentials in `db.php` to your credentials and you're pretty much done. A few things might be hard coded to point to textlr.org, but that's easily changeable.
