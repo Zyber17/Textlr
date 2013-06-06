@@ -105,7 +105,7 @@ $(document).ready(function() {
 					elem.uploaded  =  $('.uploaded');
 					elem.url       =  $('.box input');
 					elem.url .focus().select();
-					setTimeout('elem.dim.removeClass("show");',fadetime);
+					setTimeout('elem.dim.removeClass("show")',fadetime);
 				}else{
 					alert('Error');
 				}
