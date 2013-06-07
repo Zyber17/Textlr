@@ -4,7 +4,7 @@
 
 API will be located at `http://textlr.org/api.php`. All text uploads are referred to as “texts” as is the proper term for them. All responses will be in JSON. Also, please note this entire API is alpha and subject to change.
 
-Currently, there is no rate limiting. Should the API be abused, all clients abusing it will be perma-banned and rate limiting will be implemented. Eventually, the API might be paid, but, if it does become paid, it’ll just cost enough to where I can cover the hosting. (We’re talking like $15/yr for unlimited usage.)
+Currently, there is no rate limiting. Should the API be abused, all clients abusing it will be permabanned and rate limiting will be implemented. Eventually, the API might be paid, but, if it does become paid, it’ll just cost enough to where I can cover the hosting. (We’re talking like $15/yr for unlimited usage.)
 
 All API requests require the application to include a `client_key` to identify the application using the API. One can be requested by emailing <hello@zyber17.com>.
 
@@ -83,8 +83,10 @@ Please note that the title paramater will only be returned if a title exists.
 #### Generic error response example
 
     {
-    	"errors":{
-    		"code":000,
+    	"response":{
+			"code":000
+		},
+    	"error":{
     		"message":"Some reason"
     	}
     }
@@ -97,4 +99,5 @@ Please note that the title paramater will only be returned if a title exists.
 
 
 [^1]: This regex is still a WIP and is highly subject to change.
+
 [^2]: Is the same for plain being true and untrue.
