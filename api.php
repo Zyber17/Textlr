@@ -15,9 +15,13 @@ class Textlr {
 		$search = mysql_query($query, $con);
 		$exists = mysql_num_rows($search);
 		if ($exists != 1) {
-			$errors = array('errors' => array(
-				'code' => 401, 
-				'message' => "Invalid API key")
+			$errors = array(
+				'response' => array(
+					'code' => 401
+				),
+				'error' => array(
+					'message' => "Invalid API key"
+				)
 			);
 			echo json_encode($errors);
 			exit;
@@ -95,9 +99,13 @@ class Textlr {
 				}
 				exit;
 			}else{
-				$errors = array('errors' => array(
-					'code' => 507, 
-					'message' => "No available URL slug")
+				$errors = array(
+					'response' => array(
+						'code' => 507
+					),
+					'error' => array(
+						'message' => "No available URL slug"
+					)
 				);
 				if($client_key == "GXc9vHBjYMZ3KJE6M79X"){
 					return $errors;
@@ -107,9 +115,13 @@ class Textlr {
 				exit;
 			}
 		}else{
-			$errors = array('errors' => array(
-				'code' => 403, 
-				'message' => "Text too short, it must be longer than three characters.")
+			$errors = array(
+				'response' => array(
+					'code' => 403
+				),
+				'error' => array(
+					'message' => "Text too short, it must be longer than three characters."
+				)
 			);
 			if($client_key == "GXc9vHBjYMZ3KJE6M79X"){
 				return $errors;
@@ -196,9 +208,13 @@ class Textlr {
 		if(strlen($code) == 5) {
 			$realcode = $code;
 		}else{
-			$errors = array('errors' => array(
-				'code' => 404, 
-				'message' => "Text not found")
+			$errors = array(
+				'response' => array(
+					'code' => 404
+				),
+				'error' => array(
+					'message' => "Text not found"
+				)
 			);
 			if($client_key == "GXc9vHBjYMZ3KJE6M79X"){
 				return $errors;
@@ -212,9 +228,13 @@ class Textlr {
 		$search = mysql_query($query, $con);
 		
 		if(mysql_num_rows($search) == 0) {
-			$errors = array('errors' => array(
-				'code' => 404, 
-				'message' => "Text not found")
+			$errors = array(
+				'response' => array(
+					'code' => 404
+				),
+				'error' => array(
+					'message' => "Text not found"
+				)
 			);
 			if($client_key == "GXc9vHBjYMZ3KJE6M79X"){
 				return $errors;
