@@ -1,9 +1,10 @@
 <?php
-if($_POST['text']) { UI::post($_POST['text']); }
+if($_POST['text']){UI::post($_POST['text']);}
 class UI {
 	public function main() {
 		ob_start("ob_gzhandler");
 		//<script src="/index.js"></script><script src="/textinputs.js"></script><script src="/date.js"></script><script src="/js-markdown-extra.js"></script>
+		//<script src="/minified/javascript/min.js"></script>
 		echo '<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" /><link rel="shortcut icon" href="/favicon.ico" /><title>Textlr</title><link rel="stylesheet" type="text/css" href="/index.css" /><script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="/min.js"></script></head><body><div id="wrapper"><div id="typist"><header id="head"><h1>Textlr</h1><h2>Simple text uploading</h2></header><form method="post" id="form" action="interface.php"><textarea id="text" name="text" placeholder="Ready to start writing? Just select here!"></textarea><input type="submit" id="submit" name="submit" value="Get a Link" /></form></div><footer><ul><li><a href="#" onclick="help();">Help</a></li><li><a href="#" onclick="commands();">Commands</a></li><li><a href="/api.html">API</a></li><li><a href="/donate.html">Donate</a></li><li><a href="https://github.com/Zyber17/Textlr">I\'m open source!</a></li></ul></footer></div><script type="text/javascript">var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-29683575-1"]);_gaq.push(["_trackPageview"]);(function(){var b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a)})();</script></body></html>';
 	exit;
