@@ -120,7 +120,7 @@ class Textlr {
 					'code' => 403
 				),
 				'error' => array(
-					'message' => "Text too short, it must be longer than three characters."
+					'message' => "Text too short, it must be longer than two characters."
 				)
 			);
 			if($client_key == "GXc9vHBjYMZ3KJE6M79X"){
