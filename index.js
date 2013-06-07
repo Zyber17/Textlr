@@ -105,11 +105,12 @@ $(document).ready(function() {
 					elem.dim       =  $('.dim');
 					elem.uploaded  =  $('.uploaded');
 					elem.url       =  $('.box input');
-					elem.url .focus().select();
+					elem.url.focus().select();
 					setTimeout('elem.dim.removeClass("show")',fadetime);
 				}else{
-					alert(parsed.error.message);
-					reenableUploadField();
+					elem.body.append('<div class="dim show"><div class="box dialogue error o1"><h3>'+parsed.error.message+'</h3><div class="options"><ul><li onclick="dismiss()">Okay</li></ul></div></div></div>');
+					elem.edim = $('.dim');
+					setTimeout('elem.edim.removeClass("show")',fadetime);
 				}
 			});
 		});
@@ -150,6 +151,12 @@ $(document).ready(function() {
 	
 });
 
+function dismiss() {
+	reenableUploadField();
+	elem.edim.addClass('hide');
+	setTimeout('elem.edim.remove()',fadetime);
+}
+
 function reenableUploadField() {
 	elem.submit.removeAttr('disabled');
 	elem.text.removeAttr('readonly').removeClass('fade').focus();
@@ -163,7 +170,7 @@ function newUpload() {
 }
 
 	function finishNewUpload() {
-		elem.dim.append('<div class="box dialogue show"><h3>Would you like to upload another text?</h3><div class="options"><ul><li onclick="newUpload_no()">No</li><li onclick="newUpload_yes()">Yes</li></ul></div></div>');
+		elem.dim.append('<div class="box dialogue show o2"><h3>Would you like to upload another text?</h3><div class="options"><ul><li onclick="newUpload_no()">No</li><li onclick="newUpload_yes()">Yes</li></ul></div></div>');
 		elem.dialogue = $('.dialogue');
 		setTimeout('elem.dialogue.removeClass("show")',fadetime);
 		elem.uploaded.hide().removeClass('hide');
@@ -177,7 +184,7 @@ function newUpload_no() {
 	function finishNewUpload_no() {
 		elem.dialogue.remove();
 		elem.uploaded.show().addClass('show');
-		elem.url .focus().select();
+		elem.url.focus().select();
 		setTimeout('elem.uploaded.removeClass("show")',fadetime);
 	}
 
@@ -185,7 +192,7 @@ function newUpload_yes() {
 	reenableUploadField();
 	elem.text.val('');
 	elem.dim.addClass('hide');
-	setTimeout('elem.dim.remove()',fadetime)
+	setTimeout('elem.dim.remove()',fadetime);
 }
 
 function preview(notbang) {

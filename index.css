@@ -409,13 +409,18 @@ button.okay {
 				background: #f5f5f5;
 				display: block;
 				float: left;
-				width: 250px;
 				list-style: none;
 				text-align: center;
 				font-size: 20px;
 				padding: 5px 0;
 			}
-				.box.dialogue .options ul li:first-of-type{
+				.box.dialogue.o1 .options ul li {
+					width: 100%;
+				}
+				.box.dialogue.o2 .options ul li {
+					width: 250px;
+				}
+				.box.dialogue.o2 .options ul li:first-of-type{
 					margin-right: 10px;
 				}
 .fade {
