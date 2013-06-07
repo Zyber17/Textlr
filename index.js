@@ -51,63 +51,65 @@ $(document).ready(function() {
 				ajax:true
 			},
 			function(data) {
-				if (data != 'Error') {
-					var parsed = JSON.parse(data);
+				var parsed = JSON.parse(data);
+				if (parsed.response.code == 200) {
+					var pfinal = parsed.data;
 					var title = [];
-					if (parsed.title) {
+					if (pfinal.title) {
 						var workingtitle = [];
 						var cut = [];
 						var adnurl;
-						if(parsed.title.length > 231) { /*ADN*/
+						if(pfinal.title.length > 231) { /*ADN*/
 
-							if(parsed.title.substring(229, 230) == " ") { /*ADN*/
+							if(pfinal.title.substring(229, 230) == " ") { /*ADN*/
 								cut.adn = 229;
 							}else {
 								cut.adn = 230;
 							}
 
-							adnurl = parsed.url.split('/')[1];
+							adnurl = pfinal.url.split('/')[1];
 
-							if(parsed.title.substring(105, 106) == " ") { /*Twitter*/
+							if(pfinal.title.substring(105, 106) == " ") { /*Twitter*/
 								cut.twitter = 105;
 							}else {
 								cut.twitter = 106;
 							}
-							workingtitle.adn = parsed.title.substr(0, cut.adn)+"…";
-							workingtitle.twitter = parsed.title.substr(0, cut.twitter)+"…";
+							workingtitle.adn = pfinal.title.substr(0, cut.adn)+"…";
+							workingtitle.twitter = pfinal.title.substr(0, cut.twitter)+"…";
 
-						} else if (parsed.title.length > 107 && parsed.title.length <= 321) { /*Twitter*/
-							workingtitle.adn = parsed.title;
+						} else if (pfinal.title.length > 107 && pfinal.title.length <= 321) { /*Twitter*/
+							workingtitle.adn = pfinal.title;
 
-							adnurl = parsed.url.split('/')[1];
+							adnurl = pfinal.url.split('/')[1];
 
-							if(parsed.title.substring(105, 106) == " ") { /*Twitter*/
+							if(pfinal.title.substring(105, 106) == " ") { /*Twitter*/
 								cut.twitter = 105;
 							}else {
 								cut.twitter = 106;
 							}
-							workingtitle.twitter = parsed.title.substr(0, cut.twitter)+"…";
+							workingtitle.twitter = pfinal.title.substr(0, cut.twitter)+"…";
 
 						} else {
-							workingtitle.adn = parsed.title;
+							workingtitle.adn = pfinal.title;
 							workingtitle.twitter = workingtitle.adn;
-							adnurl = parsed.url;
+							adnurl = pfinal.url;
 						}
 						title.adn = encodeURIComponent(workingtitle.adn)+" ";
 						title.twitter = "&text="+encodeURIComponent(workingtitle.twitter);
 					} else {
 						title.twitter = "";
 						title.adn = "";
-						adnurl = parsed.url;
+						adnurl = pfinal.url;
 					}
-					elem.body.append('<div class="dim show"><div id="clickdetect" onclick="newUpload()"></div><div class="box uploaded"><input type="text" value="http://textlr.org/'+parsed.url+'" onclick="this.focus();this.select();" readonly="readonly" /><a href="'+parsed.url+'">See the uploaded text.</a><div id="share"><ul><li><a href="https://twitter.com/share?url=http://textlr.org/'+parsed.url+title.twitter+'&via=Textlr" target="_blank">Twitter</a></li><li><a href="https://alpha.app.net/intent/post?text='+title.adn+'http://textlr.org/'+adnurl+'">App.net</a></li></ul></div></div></div>');
+					elem.body.append('<div class="dim show"><div id="clickdetect" onclick="newUpload()"></div><div class="box uploaded"><input type="text" value="http://textlr.org/'+pfinal.url+'" onclick="this.focus();this.select();" readonly="readonly" /><a href="'+pfinal.url+'">See the uploaded text.</a><div id="share"><ul><li><a href="https://twitter.com/share?url=http://textlr.org/'+pfinal.url+title.twitter+'&via=Textlr" target="_blank">Twitter</a></li><li><a href="https://alpha.app.net/intent/post?text='+title.adn+'http://textlr.org/'+adnurl+'">App.net</a></li></ul></div></div></div>');
 					elem.dim       =  $('.dim');
 					elem.uploaded  =  $('.uploaded');
 					elem.url       =  $('.box input');
 					elem.url .focus().select();
 					setTimeout('elem.dim.removeClass("show")',fadetime);
 				}else{
-					alert('Error');
+					alert(parsed.error.message);
+					reenableUploadField();
 				}
 			});
 		});
@@ -148,6 +150,11 @@ $(document).ready(function() {
 	
 });
 
+function reenableUploadField() {
+	elem.submit.removeAttr('disabled');
+	elem.text.removeAttr('readonly').removeClass('fade').focus();
+}
+
 function newUpload() {
 	if(elem.uploaded.is(':visible')) {
 		elem.uploaded.addClass('hide');
@@ -175,8 +182,8 @@ function newUpload_no() {
 	}
 
 function newUpload_yes() {
-	elem.submit.removeAttr('disabled');
-	elem.text.removeAttr('readonly').removeClass('fade').val('').focus();
+	reenableUploadField();
+	elem.text.val('');
 	elem.dim.addClass('hide');
 	setTimeout('elem.dim.remove()',fadetime)
 }
@@ -243,6 +250,6 @@ function help() {
 	elem.text.blur();
 	elem.typist.hide();
 	elem.footer.hide();
-	elem.wrapper.append("<section id=\"help\" class=\"popover\"><h1>Have Some Help.</h1><h2>Textlr has a lot of cool features that you probably didn't know about. Here's how to use them.</h2><ul><li><h3>Markdown.</h3><p>All your documents will be parsed through <a href=\"http://daringfireball.net/projects/markdown/\">Markdown</a>.</p></li><li><h3>Title your work.</h3><p>If you're a markdown user, you know that a line starting with <code>#</code> will become a first-level heading. If the first line of your document is a first level heading we automatically use it as title of your document. It's a as simple as that.</p><ul><li><h3>I don't want a title!</h3><p>Don't want your work to be titled but want your document to being with a first level heading? No worries, Just make the top line of your document empty.</p></li></ul></li><li><h3>Preview.</h3><p>Want to preview your document? Just press and hold ⌘⌥ (cmd+alt) on a Mac. Theoretically it'd be Ctrl+Alt on a PC but that's never been tested.</p></li><li><h3>Go out with a bang.</h3><p>Textlr supports <a href=\"javascript:hidepopover();commands();\"><code>!commands</code></a> (said: \"bang commands\") that essentially are typing typing shortcuts. In fact you used one (<code>!help</code>) to get here! <a href=\"javascript:hidepopover();commands();\">Here's a list of them.</a></p></li><li><h3>I wish I didn't have to move my mouse so far to click that \"Upload\" button.</h3><p>You don't! Just press ⌘↩ (cmd+enter) when you want to submit on a Mac. Theoretically it'd be Ctrl+Enter on a PC but that's never been tested.</p></li></ul><h2 class=\"okay\">Got it?</h2><button onclick=\"hidepopover();\" class=\"okay\">Got it.</button></section>");
+	elem.wrapper.append("<section id=\"help\" class=\"popover\"><h1>Have Some Help.</h1><h2>Textlr has a lot of cool features that you probably didn't know about. Here's how to use them.</h2><ul><li><h3>Markdown.</h3><p>All your documents will be pfinal.through <a href=\"http://daringfireball.net/projects/markdown/\">Markdown</a>.</p></li><li><h3>Title your work.</h3><p>If you're a markdown user, you know that a line starting with <code>#</code> will become a first-level heading. If the first line of your document is a first level heading we automatically use it as title of your document. It's a as simple as that.</p><ul><li><h3>I don't want a title!</h3><p>Don't want your work to be titled but want your document to being with a first level heading? No worries, Just make the top line of your document empty.</p></li></ul></li><li><h3>Preview.</h3><p>Want to preview your document? Just press and hold ⌘⌥ (cmd+alt) on a Mac. Theoretically it'd be Ctrl+Alt on a PC but that's never been tested.</p></li><li><h3>Go out with a bang.</h3><p>Textlr supports <a href=\"javascript:hidepopover();commands();\"><code>!commands</code></a> (said: \"bang commands\") that essentially are typing typing shortcuts. In fact you used one (<code>!help</code>) to get here! <a href=\"javascript:hidepopover();commands();\">Here's a list of them.</a></p></li><li><h3>I wish I didn't have to move my mouse so far to click that \"Upload\" button.</h3><p>You don't! Just press ⌘↩ (cmd+enter) when you want to submit on a Mac. Theoretically it'd be Ctrl+Enter on a PC but that's never been tested.</p></li></ul><h2 class=\"okay\">Got it?</h2><button onclick=\"hidepopover();\" class=\"okay\">Got it.</button></section>");
 	return '';
 }
