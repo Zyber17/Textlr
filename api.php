@@ -227,7 +227,7 @@ class Textlr {
 		$query  = "SELECT * FROM `uploads` WHERE `short_url` = '".$realcode."'";
 		$search = mysql_query($query, $con);
 		
-		if(mysql_num_rows($search) == 0) {
+		if(mysql_num_rows($search) != 1) {
 			$errors = array(
 				'response' => array(
 					'code' => 404
@@ -249,7 +249,7 @@ class Textlr {
 				$downloads = $answer['downloads'];
 				$downloads++;
 				$id = $answer['id'];
-				$updatequery = "UPDATE  `textlr`.`uploads` SET  `downloads` =  $downloads WHERE  `uploads`.`id` = $id";
+				$updatequery = "UPDATE `uploads` SET `downloads` =  $downloads WHERE `uploads`.`id` = $id";
 				mysql_query($updatequery, $con);
 
 				$response = array('response' => array(
@@ -271,7 +271,7 @@ class Textlr {
 				$views = $answer['views'];
 				$views++;
 				$id = $answer['id'];
-				$updatequery = "UPDATE  `textlr`.`uploads` SET  `views` =  $views WHERE  `uploads`.`id` = $id";
+				$updatequery = "UPDATE `uploads` SET `views` = $views WHERE `uploads`.`id` = $id";
 				mysql_query($updatequery, $con);
 
 				$response = array('response' => array(
