@@ -57,46 +57,41 @@ class UI {
 
 		$loaded = Textlr::load($realcode,"GXc9vHBjYMZ3KJE6M79X",$isplain);
 
-		if($loaded['errors']) {
-			if($loaded['errors']['code'] == 404) {
+		if($loaded['response']['code'] != 200) {
+			if($loaded['response']['code'] == 404) {
 				echo $errorhtml;
 				exit;
 			}else{
-				echo "Oops, something went wrong";
+				echo $loaded['error']['message'];
 				exit;
 			}
 		} else {
-			if ($loaded['response']['code'] == 200) {
-				if($loaded['data']['title']) {
-					$title = $loaded['data']['title'];
+			if($loaded['data']['title']) {
+				$title = $loaded['data']['title'];
+			}else{
+				$title = false;
+			}
+			if($isplain) {
+				if ($title) {
+					$fname = $title;
 				}else{
-					$title = false;
+					$fname = $realcode;
 				}
-				if($isplain) {
-					if ($title) {
-						$fname = $title;
-					}else{
-						$fname = $realcode;
-					}
-					header('Content-type: text/plain; charset= UTF-8');
-					header('Content-disposition: attachment; filename='.htmlspecialchars_decode(urlencode($fname)).'.txt');
-					echo($loaded['data']['text']); /*Is the same as nonplain becuase api::load returns the type based on need.*/
+				header('Content-type: text/plain; charset= UTF-8');
+				header('Content-disposition: attachment; filename='.htmlspecialchars_decode(urlencode($fname)).'.txt');
+				echo($loaded['data']['text']); /*Is the same as nonplain becuase api::load returns the type based on need.*/
 
-				}else {
-					$html1 = '<!DOCTYPE html>
-	<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" /><meta name="twitter:card" content="summary"><meta name="twitter:site" content="Textlr"><meta name="twitter:site:id" content="513318672"><meta name="twitter:url" content="http://bs1.textlr.org/'.$realcode.'"><meta name="twitter:title" content="'.($title ? $title : 'Textlr: '.$realcode).'"><meta name="twitter:description" content="'.substr(strip_tags($loaded['data']['text']), 0, 220).'"><link rel="shortcut icon" href="/favicon.ico" /><title>Textlr'.($title ? ': '.$title : '').'</title><link rel="stylesheet" type="text/css" href="/page.css" />'.$dark.'</head><body onload="d();"><header id="brand"><div id="center"><a href="/" title="Textlr">Textlr</a></div></header><div id="wrapper"><article>';
-					if ($title) {
-						$title = '<h1 class="title">'.$title.'</h1>';
-					}
-					$html2 = '</article></div></body></html>';
-					echo $html1.($title ? $title : '').$loaded['data']['text'].$html2;
-					exit;
+			}else {
+				$html1 = '<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" /><meta name="twitter:card" content="summary"><meta name="twitter:site" content="Textlr"><meta name="twitter:site:id" content="513318672"><meta name="twitter:url" content="http://bs1.textlr.org/'.$realcode.'"><meta name="twitter:title" content="'.($title ? $title : 'Textlr: '.$realcode).'"><meta name="twitter:description" content="'.substr(strip_tags($loaded['data']['text']), 0, 220).'"><link rel="shortcut icon" href="/favicon.ico" /><title>Textlr'.($title ? ': '.$title : '').'</title><link rel="stylesheet" type="text/css" href="/page.css" />'.$dark.'</head><body onload="d();"><header id="brand"><div id="center"><a href="/" title="Textlr">Textlr</a></div></header><div id="wrapper"><article>';
+				if ($title) {
+					$title = '<h1 class="title">'.$title.'</h1>';
 				}
-		}else{
-			echo "Oops, something went wrong";
-			exit;
+				$html2 = '</article></div></body></html>';
+				echo $html1.($title ? $title : '').$loaded['data']['text'].$html2;
+				exit;
+			}
 		}
-	}
 	}
 	
 }
