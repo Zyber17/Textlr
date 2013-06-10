@@ -2,9 +2,16 @@
 
 Textlr is a open source platform for uploaded text for easy sharing. It uses [Markdown](http://daringfireball.net/projects/markdown/) and has other nifty features baked in. The official Textlr web service is available to use at [textlr.org](http://textlr.org/), but anyone is free to host it.
 
+Current version: `2.0`.
+
 ## Roadmap
 
-1. Style dialogue boxes more proactively.
+`@v:x.x.x` is a tag to describe the version of Textlr that the roadmap items are slated for
+
+1. Style dialogue boxes more proactively. @v:2.1
+2. Improve handling of special characters in descriptive URLs. @v:2.1
+3. Improve styling of titles on mobile devices. @v:2.1
+4. Clean up the code (Especially the JavaScript). @v:2.1
 
 ## Installation
 
