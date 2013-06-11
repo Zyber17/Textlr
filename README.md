@@ -6,7 +6,7 @@ Current version: `2.0`.
 
 ## Roadmap
 
-`@v:x.x.x` is a tag to describe the version of Textlr that the roadmap items are slated for
+`@v:x.x.x` is a tag to describe the version of Textlr that the roadmap items are slated for.
 
 1. Style dialogue boxes more proactively. @v:2.1
 2. Improve handling of special characters in descriptive URLs. @v:2.1
