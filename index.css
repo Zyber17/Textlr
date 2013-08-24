@@ -157,8 +157,9 @@ footer {
 				border-right: none;
 			}
 			footer ul li a:link, footer ul li a:visited {
-				color: #777;
+				color: #888;
 				text-decoration: none;
+				font-weight: 200;
 			}
 	
 	.title {
