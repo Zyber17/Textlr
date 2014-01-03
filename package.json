@@ -1,0 +1,36 @@
+{
+  "name": "Textlr",
+  "version": "3.0.0-alpha",
+  "author": "Zackary Corbett <zackary@corbett.im>",
+  "description": "A simple text uploading website",
+  "contributors": [
+    {
+      "name": "Zackary Corbett",
+      "email": "zackary@corbett.im",
+      "twitter": "@ZackaryCorbett",
+      "app.net": "@Zackary"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zyber17/Textlr.git"
+  },
+  "keywords": [
+    "markdown",
+    "text",
+    "plaintext",
+    "uploading"
+  ],
+  "dependencies": {
+    "nib": "~1.0.1",
+    "stylus": "~0.41.3",
+    "coffee-script": "~1.6.3",
+    "connect-assets": "~2.5.3",
+    "socket.io": "~0.9.16",
+    "express": "~3.4.7"
+  },
+  "engines": {
+    "node": ">=0.10.11"
+  },
+  "start": "coffee app.coffee"
+}
