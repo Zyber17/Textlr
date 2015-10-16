@@ -1,6 +1,5 @@
 var cluster = require('cluster');
 if (cluster.isMaster) { //Behold the multithreding nonsense you need.
-
 	console.log("V running in a " + (process.env.NODE_ENV ? '`' + process.env.NODE_ENV + '`' : 'production') + " environment.");
 
 	if (process.env.NODE_ENV === 'setup') {
@@ -31,5 +30,5 @@ if (cluster.isMaster) { //Behold the multithreding nonsense you need.
 } else if (process.env.NODE_ENV !== 'setup') {
 	var express = require('express');
 	var http = require('http');
-	// Todo, make the actually, you know, app.
+	// Todo, make the actual, you know, app.
 }
