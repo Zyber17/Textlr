@@ -1,0 +1,24 @@
+{
+  "name": "textlr",
+  "version": "3.0.0",
+  "description": "A Markdown uploading service.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zyber17/Textlr.git"
+  },
+  "keywords": [
+    "Markdown",
+    "text",
+    "uploading"
+  ],
+  "author": "Zackary Corbett",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/Zyber17/Textlr/issues"
+  },
+  "homepage": "https://github.com/Zyber17/Textlr#readme"
+}
