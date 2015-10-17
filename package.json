@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Zyber17/Textlr/issues"
   },
-  "homepage": "https://github.com/Zyber17/Textlr#readme"
+  "homepage": "https://github.com/Zyber17/Textlr#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
 }
