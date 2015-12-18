@@ -1,0 +1,28 @@
+.boxfix {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#wrapper #upload #text, #wrapper #upload #enter {
+	display: block;
+	width: 100%;
+	color: #0d0d0d;
+	font: 16px "Helvetica Neue", Helvetica, "Lucida Grande", Arial, sans-serif;
+	outline: none;
+	border: none;
+}
+
+#wrapper #upload #text {
+	min-height: 320px;
+	background-color: #f2f2f2;
+	margin-bottom: 20px;
+}
+
+#wrapper #upload #enter {
+	background-color: #e2e2e2;
+	padding: 15px;
+	font-weight: bold;
+}

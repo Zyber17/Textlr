@@ -1,0 +1,15 @@
+body {
+	font: 16px "Helvetica Neue", Helvetica, "Lucida Grande", Arial, sans-serif;
+	background-color: #f2f2f2;
+	color: #0d0d0d;
+}
+
+a {
+	color: #00B7FF;
+}
+
+#wrapper {
+	max-width: 600px;
+	padding: 40px;
+	margin: 0 auto;
+}
