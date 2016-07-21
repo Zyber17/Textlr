@@ -47,7 +47,7 @@ router.post('/', function(req, res, next) {
 		client.query({
 			text:   "INSERT INTO texts(id,markedtext,nakedtext) VALUES ($1, $2, $3)",
 			name:   "add-text",
-			values: [id, nakedtext, markedtext]
+			values: [id, markedtext, nakedtext]
 		});
     });
 
