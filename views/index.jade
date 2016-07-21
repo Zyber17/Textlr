@@ -18,5 +18,6 @@ block head
 block content
 	h1 Textlr
 	#upload
-		textarea#text.boxfix(placeholder="Just start typing…")
-		button#enter.boxfix Upload
+		form(id="texts", method="post", action="/")
+			textarea#text.boxfix(placeholder="Just start typing…",name="text")
+			input(type="submit",value="Upload")#enter.boxfix
