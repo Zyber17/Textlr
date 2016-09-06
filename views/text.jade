@@ -1,4 +1,10 @@
 extends layout
 
 block content
-	article!= content
+	if title == "Textlr"
+		article!= text
+	else
+		article
+			h1= title
+			| !{text}
+	
