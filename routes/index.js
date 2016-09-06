@@ -122,9 +122,6 @@ router.get(/^.*(.{10}$)/i, function(req, res, next) {
 			}
 		});
 	});
-
-
-
 });
 
 module.exports = router;
