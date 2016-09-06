@@ -41,7 +41,7 @@ router.post('/', function(req, res, next) {
 		var start = (nakedtext.charAt(1) == ' ' ? 2 : 1)
 
 		title = text.slice(start,slashn);
-		
+
 		if(slashr - slashn == 1) {
 			text = text.slice(slashr+1)
 		} else {
@@ -80,7 +80,7 @@ router.post('/', function(req, res, next) {
     });
 
 	res.writeHead(302, {
-		'Location': '/'+(title != '' ? encodeURIComponent(title).substring(0,35) + '/' : '')+id
+		'Location': '/'+(title != '' ? encodeURIComponent(title).replace('%20','+').substring(0,35) + '/' : '')+id
 	});
 	res.end();
 });
